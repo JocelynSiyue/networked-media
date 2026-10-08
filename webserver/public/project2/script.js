@@ -52,56 +52,20 @@ function updateScreen() {
             }
         );
 
-
-    /* --------------------------------
-       CONVERT TIME TO MINUTES
-    -------------------------------- */
-
-    const totalMinutes =
+        const totalMinutes =
         hours * 60 + minutes;
+        const sunrise = 6 * 60;
+        const sunset = 18 * 60;
 
-
-    /*
-        Sunrise = 6:00 AM
-        Sunset = 6:00 PM
-    */
-
-    const sunrise = 6 * 60;
-
-    const sunset = 18 * 60;
-
-
-    /* --------------------------------
-       DAY
-    -------------------------------- */
-
-    if (
+        if (
         totalMinutes >= sunrise &&
         totalMinutes < sunset
     ) {
-
-        /*
-            Convert 6 AM → 6 PM
-            into a number from 0 → 1
-        */
-
         const progress =
             (totalMinutes - sunrise) /
             (sunset - sunrise);
-
-
-        /*
-            Sun moves horizontally
-        */
-
         const sunX =
             progress * 100;
-
-
-        /*
-            Sun moves in an arc
-        */
-
         const sunY =
             75 -
             Math.sin(progress * Math.PI) * 60;
@@ -116,79 +80,56 @@ function updateScreen() {
         if (progress < 0.15) {
             sky.style.background =
                 "linear-gradient(to bottom, #f7b267, #f6d365)";
-
+            building.style.color = "#1a1a1a";
         }
-
         else if (progress > 0.80) {
             sky.style.background =
                 "linear-gradient(to bottom, #813c1e, #f6d365)";
         }
-
         else {
             sky.style.background =
                 "linear-gradient(to bottom, #4facfe, #c2e9fb)";
         }
         ground.style.background =
             "#4f633f";
-
     }
-
     else {
-
         sun.style.opacity = "0";
         moon.style.opacity = "1";
         stars.style.opacity = "1";
         sky.style.background =
             "linear-gradient(to bottom, #020024, #090979, #000000)";
-
-
         ground.style.background =
             "#101a14";
-
-
         let nightProgress;
-
-
         if (totalMinutes >= sunset) {
-
             nightProgress =
                 (totalMinutes - sunset) /
                 (24 * 60 - sunset);
-
         }
-
         else {
-
             nightProgress =
                 (totalMinutes +
                 (24 * 60 - sunset)) /
-                (24 * 60 - sunset);
-
+                (24 * 60 - sunset)
         }
-
-
         const moonX =
             nightProgress * 100;
-
-
         const moonY =
             75 -
             Math.sin(
                 nightProgress * Math.PI
             ) * 50;
-
-
         moon.style.left =
             moonX + "%";
-
         moon.style.top =
             moonY + "%";
     }
 }
 
 updateScreen();
-
 setInterval(
     updateScreen,
     1000
 );
+
