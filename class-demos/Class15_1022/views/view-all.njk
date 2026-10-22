@@ -1,0 +1,10 @@
+{% include "partial-nav.njk" %}
+
+{% for singleMessage in messagesArrayFromServer %}
+    <p>
+        <span>User:</span>
+        <span>{{singleMessage.user}}</span>
+        <span>Message:</span>
+        <span>{{singleMessage.message}}</span>
+    </p>
+{% endfor %}

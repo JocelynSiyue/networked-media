@@ -1,0 +1,40 @@
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #222;
+}
+
+.title a {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navigation {
+  display: flex;
+  gap: 24px;
+}
+
+.navigation a {
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+.navigation a:hover {
+  color: #19d1d4;
+}
+
+.main-content {
+  padding: 80px 40px;
+  text-align: center;
+}
+
+footer {
+  padding: 20px;
+  text-align: center;
+}

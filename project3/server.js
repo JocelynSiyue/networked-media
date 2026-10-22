@@ -19,4 +19,14 @@ nunjucks.configure("views", {
 });
 app.set("view engine", "njk");
 
-app.get('/')
+app.get("/", (req, res) => {
+  res.render("baseLayout.njk");
+});
+
+app.get("/newPost", (req, res) => {
+  res.render("newPost.njk");
+});
+
+app.listen(3000, () => {
+  console.log("Server running at http://localhost:3000");
+});
