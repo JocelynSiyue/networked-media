@@ -1,40 +1,186 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #292929;
+  color: #111;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+a {
+  color: #00c9ad;
+  text-decoration: none;
+}
 
 .site-header {
+  min-height: 110px;
+  padding: 20px 30px;
+  background: #171717;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  background-color: #222;
+  justify-content: space-between;
+  gap: 20px;
 }
 
-.title a {
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
+.title {
+  color: #00c9ad;
   text-decoration: none;
+  font-size: clamp(24px, 4vw, 48px);
 }
 
-.navigation {
-  display: flex;
-  gap: 24px;
-}
-
-.navigation a {
-  color: white;
-  font-size: 30px;
+.add-button {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #00c9ad;
+  color: #111;
   text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 38px;
+  line-height: 1;
 }
 
-.navigation a:hover {
-  color: #19d1d4;
+.film-wall {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 14px;
+  background: #111;
+  min-height: 70vh;
 }
 
-.main-content {
-  padding: 80px 40px;
+.film-frame {
+  position: relative;
+  margin: 0;
+  padding: 24px 22px;
+  background-color: #111;
+
+  /* 胶片两侧的小孔 */
+  background-image:
+    radial-gradient(ellipse, #ddd 55%, transparent 60%),
+    radial-gradient(ellipse, #ddd 55%, transparent 60%);
+  background-position:
+    left 5px top 8px,
+    right 5px top 8px;
+  background-size: 12px 26px;
+  background-repeat: repeat-y;
+}
+
+.film-frame img {
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  background: #d8d8d8;
+}
+
+.post-info {
+  padding: 8px 4px;
+  color: white;
+  overflow-wrap: anywhere;
+}
+
+.post-info p {
+  margin: 6px 0;
+}
+
+.empty-message {
+  grid-column: 1 / -1;
+  align-self: center;
+  color: white;
   text-align: center;
+  font-size: 22px;
 }
 
-footer {
-  padding: 20px;
+.site-footer {
+  padding: 38px 16px;
+  background: #d8d8d8;
   text-align: center;
+  font-size: clamp(18px, 2vw, 28px);
+}
+
+.form-page {
+  padding: 48px 6%;
+  background: #d8d8d8;
+}
+
+.post-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.image-upload {
+  min-height: 480px;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  gap: 16px;
+  background: #e5e4e4;
+  color: #222;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.image-upload input {
+  max-width: 100%;
+  color: white;
+}
+
+.post-fields {
+  display: grid;
+  gap: 18px;
+}
+
+.post-fields label {
+  display: grid;
+  gap: 8px;
+}
+
+.post-fields input,
+.post-fields textarea {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: 12px;
+  background: #f5f5f5;
+  font: inherit;
+}
+
+.post-fields textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.post-fields button {
+  justify-self: end;
+  padding: 8px 20px;
+  border: 0;
+  border-radius: 12px;
+  background: #f5f5f5;
+  color: #00a991;
+  font: inherit;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .film-wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .post-form {
+    grid-template-columns: 1fr;
+  }
+
+  .image-upload {
+    min-height: 320px;
+  }
 }

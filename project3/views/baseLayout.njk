@@ -1,32 +1,37 @@
-<html>
-    <head>
-        <title>NY street photography enthusiasts 🗽</title>
-        <link rel="stylesheet" href="/css/style.css">
-    </head>
-    <body>
-        <header class="site-header">
-            <div class="title">
-                <a href="/">NY street photography enthusiasts 🗽</a>
-            </div>
-            <nav class="navigation">
-                <a href="/newPost">+</a>
-                
-            </nav>
-        </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NY Street Photography Enthusiasts</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="title" href="/">
+      NY STREET PHOTOGRAPHY ENTHUSIASTS 🗽
+    </a>
 
-        <main>
-            <section class="main-content">
-                <h1>HI</h1>
-            </section>
-        </main>
+    <a class="add-button" href="/newImage" aria-label="Add a photo">+</a>
+  </header>
 
+  <main class="film-wall">
+    {% for post in posts %}
+      <article class="film-frame">
+        <img src="{{ post.image }}" alt="Street photograph">
 
-        <footer>
-            <nav class="navigation">
-                <a href="/">Home</a>
-            </nav>
-            <p>Jocelyn's 26Fall Midterm</p>
-        </footer>
+        <div class="post-info">
+          <p>{{ post.date }}{% if post.location %} · {{ post.location }}{% endif %}</p>
+          <p>{{ post.description }}</p>
+        </div>
+      </article>
+    {% else %}
+      <p class="empty-message">No photos yet. Click + to add one.</p>
+    {% endfor %}
+  </main>
 
-    </body>
+  <footer class="site-footer">
+    “Different eyes, different stories, one shared world.”
+  </footer>
+</body>
 </html>

@@ -33,6 +33,8 @@ app.get("/view-all", (req, res) => {
   res.render("view-all.njk",{messagesArrayFromServer:allData});
 });
 
+app.use(express.urlencoded({ extended: true }));
+
 app.post('/send-message', (req,res) =>{
   //console.log (request.body);
   allData.push (req.body);

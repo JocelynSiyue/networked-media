@@ -1,3 +1,7 @@
+const multer = require("multer");
+const upload = multer({ dest: "public/uploads/" });
+//https://www.npmjs.com/package/multer
+
 const express = require("express");
 /************
  * import our templating library
@@ -5,6 +9,8 @@ const express = require("express");
 const nunjucks = require("nunjucks");
 
 const app = express();
+
+const posts = [];
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -19,12 +25,24 @@ nunjucks.configure("views", {
 });
 app.set("view engine", "njk");
 
+
 app.get("/", (req, res) => {
-  res.render("baseLayout.njk");
+  res.render("baseLayout.njk", { posts });
 });
 
-app.get("/newPost", (req, res) => {
-  res.render("newPost.njk");
+app.get("/newImage", (req, res) => {
+  res.render("newImage.njk");
+});
+
+app.post("/newImage", upload.single("image"), (req, res) => {
+  posts.push({
+    image: `/uploads/${req.file.filename}`,
+    date: req.body.date,
+    location: req.body.location,
+    description: req.body.description
+  });
+
+  res.redirect("/");
 });
 
 app.listen(3000, () => {

@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>NY STREET PHOTOGRAPHY ENTHUSIASTS 🗽</title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="title">
+                <a href="/">NY STREET PHOTOGRAPHY ENTHUSIASTS 🗽</a>
+            </div>
+        </header>
+        
+        <main class="form-page">
+            <form class="post-form" action="/newImage" method="POST" enctype="multipart/form-data">
+            <label class="image-upload">
+                <span>Choose a photo</span>
+                <input name="image" type="file" accept="image/*" required>
+            </label>
+
+            <div class="post-fields">
+                <label>
+                Date
+                <input name="date" type="date" required>
+                </label>
+
+                <label>
+                Location
+                <input name="location" type="text" placeholder="Enter a location">
+                </label>
+
+                <label>
+                Description
+                <textarea name="description" placeholder="Write a caption..."></textarea>
+                </label>
+
+                <button type="submit">POST!</button>
+            </div>
+            </form>
+        </main>
+
+        <footer class="site-footer">
+        “Different eyes, different stories, one shared world.”
+        </footer>
+
+    </body>
+</html>
