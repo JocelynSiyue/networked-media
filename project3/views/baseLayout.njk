@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,17 +7,14 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="title" href="/">
-      NY STREET PHOTOGRAPHY ENTHUSIASTS 🗽
-    </a>
-
+    <a class="title" href="/">NY STREET PHOTOGRAPHY ENTHUSIASTS 🗽</a>
     <a class="add-button" href="/newImage" aria-label="Add a photo">+</a>
   </header>
 
   <main class="film-wall">
-    {% for post in posts %}
+    {% for post in messagesArrayFromServer %}
       <article class="film-frame">
-        <img src="{{ post.image }}" alt="Street photograph">
+        <img src="{{ post.imgSrc }}" alt="Street photograph">
 
         <div class="post-info">
           <p>{{ post.date }}{% if post.location %} · {{ post.location }}{% endif %}</p>

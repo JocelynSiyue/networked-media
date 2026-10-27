@@ -1,46 +1,74 @@
 <html>
-    <head>
-        <title>NY STREET PHOTOGRAPHY ENTHUSIASTS 🗽</title>
-        <link rel="stylesheet" href="/css/style.css">
-    </head>
-    <body>
-        <header class="site-header">
-            <div class="title">
-                <a href="/">NY STREET PHOTOGRAPHY ENTHUSIASTS 🗽</a>
-            </div>
-        </header>
-        
-        <main class="form-page">
-            <form class="post-form" action="/newImage" method="POST" enctype="multipart/form-data">
-            <label class="image-upload">
-                <span>Choose a photo</span>
-                <input name="image" type="file" accept="image/*" required>
-            </label>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post a Photo</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="title" href="/">NY STREET PHOTOGRAPHY ENTHUSIASTS 🗽</a>
+  </header>
 
-            <div class="post-fields">
-                <label>
-                Date
-                <input name="date" type="date" required>
-                </label>
+  <main class="form-page">
+    <form
+      class="post-form"
+      action="/send-message"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <label class="image-upload" for="theImage">
+        <span id="uploadPrompt">Choose a photo</span>
+        <input
+          id="theImage"
+          name="theImage"
+          type="file"
+          accept="image/*"
+          required
+        >
+        <img id="imagePreview" alt="Selected photo preview" hidden>
+      </label>
 
-                <label>
-                Location
-                <input name="location" type="text" placeholder="Enter a location">
-                </label>
+      <div class="post-fields">
+        <label>
+          Date
+          <input name="date" type="date" required>
+        </label>
 
-                <label>
-                Description
-                <textarea name="description" placeholder="Write a caption..."></textarea>
-                </label>
+        <label>
+          Location
+          <input name="location" type="text" placeholder="Enter a location">
+        </label>
 
-                <button type="submit">POST!</button>
-            </div>
-            </form>
-        </main>
+        <label>
+          Description
+          <textarea name="description" placeholder="Write a caption..."></textarea>
+        </label>
 
-        <footer class="site-footer">
-        “Different eyes, different stories, one shared world.”
-        </footer>
+        <button type="submit">POST!</button>
+      </div>
+    </form>
+  </main>
 
-    </body>
+  <footer class="site-footer">
+    “Different eyes, different stories, one shared world.”
+  </footer>
+
+  <script>
+    const imageInput = document.querySelector("#theImage");
+    const imagePreview = document.querySelector("#imagePreview");
+    const uploadPrompt = document.querySelector("#uploadPrompt");
+
+    imageInput.addEventListener("change", () => {
+      const selectedImage = imageInput.files[0];
+
+      if (!selectedImage) return;
+      
+    //https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+      imagePreview.src = URL.createObjectURL(selectedImage);
+      imagePreview.hidden = false;
+      uploadPrompt.textContent = "Photo selected — click to change";
+    });
+  </script>
+</body>
 </html>

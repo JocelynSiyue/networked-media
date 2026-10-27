@@ -1,48 +1,55 @@
-const multer = require("multer");
-const upload = multer({ dest: "public/uploads/" });
-//https://www.npmjs.com/package/multer
-
 const express = require("express");
-/************
- * import our templating library
- ************/
 const nunjucks = require("nunjucks");
+
+// Multer handles uploaded image files
+const multer = require("multer");
+const uploadProcessor = multer({ dest: "public/upload/" });
 
 const app = express();
 
-const posts = [];
-
 app.use(express.static("public"));
+
 app.use(express.urlencoded({ extended: true }));
 
-/************
- * add our nunjucks settings under our middleware
- * this links our express application to the templating tool
- ************/
 nunjucks.configure("views", {
   autoescape: true,
-  express: app,
+  express: app
 });
+
 app.set("view engine", "njk");
 
+const allData = [];
 
 app.get("/", (req, res) => {
-  res.render("baseLayout.njk", { posts });
+  res.render("baseLayout.njk", {
+    messagesArrayFromServer: allData
+  });
 });
 
 app.get("/newImage", (req, res) => {
   res.render("newImage.njk");
 });
 
-app.post("/newImage", upload.single("image"), (req, res) => {
-  posts.push({
-    image: `/uploads/${req.file.filename}`,
-    date: req.body.date,
-    location: req.body.location,
-    description: req.body.description
-  });
+app.post(
+  "/send-message",
+  uploadProcessor.single("theImage"),
+  (req, res) => {
+    const receivedMessage = req.body;
 
-  res.redirect("/");
+    if (req.file) {
+      receivedMessage.imgSrc = "/upload/" + req.file.filename;
+    }
+
+    allData.unshift(receivedMessage);
+
+    res.redirect("/view-all");
+  }
+);
+
+app.get("/view-all", (req, res) => {
+  res.render("baseLayout.njk", {
+    messagesArrayFromServer: allData
+  });
 });
 
 app.listen(3000, () => {
